@@ -24,7 +24,7 @@
             android:textSize="20sp"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/generate_button"
+            android:id="@+id/leave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Выйти"

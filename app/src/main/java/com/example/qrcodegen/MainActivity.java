@@ -4,15 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button scanButton, generateButton;
+    Button scanButton, leaveBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,12 +16,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         scanButton = findViewById(R.id.scan_button);
-        generateButton = findViewById(R.id.generate_button);
+        leaveBtn = findViewById(R.id.leave);
 
         scanButton.setOnClickListener(v ->
-                startActivity(new Intent(MainActivity.this, ScanActivity.class)));
-
-        generateButton.setOnClickListener(v ->
                 startActivity(new Intent(MainActivity.this, GenerateActivity.class)));
+
+        leaveBtn.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, LoginActivity.class)));
     }
 }
