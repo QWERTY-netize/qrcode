@@ -32,12 +32,12 @@
                     "name TEXT NOT NULL, " +
                     "subject TEXT)");
 
-            db.execSQL("CREATE TABLE students (" +
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "login TEXT UNIQUE NOT NULL, " +
-                    "password_hash TEXT NOT NULL, " +
-                    "name TEXT NOT NULL, " +
-                    "class TEXT NOT NULL)");
+                db.execSQL("CREATE TABLE students (" +
+                        "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "login TEXT UNIQUE NOT NULL, " +
+                        "password_hash TEXT NOT NULL, " +
+                        "name TEXT NOT NULL, " +
+                        "class TEXT NOT NULL)");
 
             db.execSQL("CREATE TABLE attendance (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -226,7 +226,7 @@
             SQLiteDatabase db = this.getReadableDatabase();
             String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
-            String query = "SELECT a.id, s.name as student_name, a.date " +
+            String query = "SELECT a.id, s.name AS student_name, s.class AS student_class, a.date " +
                     "FROM attendance a " +
                     "JOIN students s ON a.student_id = s.id " +
                     "WHERE a.teacher_id = ? AND date(a.date) = date(?) " +
@@ -239,10 +239,12 @@
                     AttendanceRecord record = new AttendanceRecord();
                     record.setId(cursor.getInt(0));
                     record.setStudentName(cursor.getString(1));
-                    record.setDate(cursor.getString(2));
+                    record.setStudentClass(cursor.getString(2)); // <- класс ученика
+                    record.setDate(cursor.getString(3));
                     records.add(record);
                 } while (cursor.moveToNext());
             }
+
             cursor.close();
             return records;
         }

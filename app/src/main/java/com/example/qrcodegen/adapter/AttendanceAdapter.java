@@ -30,6 +30,7 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
         AttendanceRecord record = records.get(position);
         holder.tvStudent.setText(record.getStudentName());
+        holder.tvClass.setText("Класс: " + record.getStudentClass());
         holder.tvDate.setText(record.getDate());
     }
 
@@ -37,11 +38,12 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.Vi
     public int getItemCount() { return records.size(); }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvStudent, tvDate;
+        public TextView tvStudent, tvClass, tvDate;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvStudent = itemView.findViewById(R.id.tvStudent);
+            tvClass = itemView.findViewById(R.id.tvClass);
             tvDate = itemView.findViewById(R.id.tvDate);
         }
     }
