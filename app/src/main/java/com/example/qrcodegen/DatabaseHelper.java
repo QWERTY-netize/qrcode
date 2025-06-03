@@ -5,9 +5,14 @@
     import android.database.Cursor;
     import android.database.sqlite.SQLiteDatabase;
     import android.database.sqlite.SQLiteOpenHelper;
+
+    import com.example.qrcodegen.model.AttendanceRecord;
+
     import java.security.MessageDigest;
     import java.text.SimpleDateFormat;
+    import java.util.ArrayList;
     import java.util.Date;
+    import java.util.List;
     import java.util.Locale;
 
     public class DatabaseHelper extends SQLiteOpenHelper {
@@ -214,5 +219,31 @@
             registerStudent("studentNikolaeva", "student8pass", "Ольга Николаева", "11-Б");
             registerStudent("studentFedorov", "student9pass", "Михаил Фёдоров", "11-Б");
             registerStudent("studentKozlova", "student10pass", "Наталья Козлова", "11-Б");
+        }
+
+        public List<AttendanceRecord> getTodaysAttendanceRecords(int teacherId) {
+            List<AttendanceRecord> records = new ArrayList<>();
+            SQLiteDatabase db = this.getReadableDatabase();
+            String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
+            String query = "SELECT a.id, s.name as student_name, a.date " +
+                    "FROM attendance a " +
+                    "JOIN students s ON a.student_id = s.id " +
+                    "WHERE a.teacher_id = ? AND date(a.date) = date(?) " +
+                    "ORDER BY a.date DESC";
+
+            Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(teacherId), currentDate});
+
+            if (cursor.moveToFirst()) {
+                do {
+                    AttendanceRecord record = new AttendanceRecord();
+                    record.setId(cursor.getInt(0));
+                    record.setStudentName(cursor.getString(1));
+                    record.setDate(cursor.getString(2));
+                    records.add(record);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            return records;
         }
     }

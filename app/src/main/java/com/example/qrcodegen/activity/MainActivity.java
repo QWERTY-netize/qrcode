@@ -1,4 +1,4 @@
-package com.example.qrcodegen;
+package com.example.qrcodegen.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.qrcodegen.DatabaseHelper;
+import com.example.qrcodegen.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.qrcode.QRCodeWriter;
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         studentId = getIntent().getIntExtra("studentId", -1);
         name = dbHelper.getStudentNameById(studentId);
 
-        profileHeader.setText("Профиль: " + name);
+        profileHeader.setText("Профиль ученика: " + name);
 
         scanButton.setOnClickListener(v -> {
             generateQR(String.valueOf(studentId));
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             finish();
         });
+
     }
 
     private void generateQR(String text) {

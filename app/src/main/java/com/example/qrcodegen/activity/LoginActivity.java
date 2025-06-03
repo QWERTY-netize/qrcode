@@ -1,10 +1,14 @@
-package com.example.qrcodegen;
+package com.example.qrcodegen.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.qrcodegen.DatabaseHelper;
+import com.example.qrcodegen.R;
+import com.example.qrcodegen.ToastUtility;
 
 
 public class LoginActivity extends AppCompatActivity {

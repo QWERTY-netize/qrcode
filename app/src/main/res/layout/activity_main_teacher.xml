@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainTeacher">
+    tools:context=".activity.MainTeacher">
 
     <TextView
         android:id="@+id/profile_header"
@@ -34,6 +34,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Сканировать QR"
+            android:background="@drawable/button_background"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Таблица пристуствующих"
+            android:layout_marginTop="24dp"
             android:background="@drawable/button_background"
             android:textColor="@color/white"
             android:textStyle="bold"
