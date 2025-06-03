@@ -28,9 +28,6 @@
             android:name=".ScanActivity"
             android:exported="false" />
         <activity
-            android:name=".GenerateActivity"
-            android:exported="false" />
-        <activity
             android:name=".CaptureActivityPortrait"
             android:exported="false" />
         <activity

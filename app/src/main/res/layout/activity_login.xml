@@ -60,7 +60,7 @@
         android:drawablePadding="16dp"
         android:ems="10"
         android:hint="Пароль"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:textColor="#756c6c"
         android:textColorHint="#756c6c"
         android:textSize="18sp"
