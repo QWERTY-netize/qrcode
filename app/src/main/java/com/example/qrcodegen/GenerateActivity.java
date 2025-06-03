@@ -19,7 +19,6 @@ import com.google.zxing.qrcode.QRCodeWriter;
 
 public class GenerateActivity extends AppCompatActivity {
 
-    EditText inputText;
     Button generateBtn;
     ImageView qrImage;
 
@@ -27,19 +26,6 @@ public class GenerateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate);
-
-        inputText = findViewById(R.id.input_text);
-        generateBtn = findViewById(R.id.generate_btn);
-        qrImage = findViewById(R.id.qr_image);
-
-        generateBtn.setOnClickListener(v -> {
-            String text = inputText.getText().toString();
-            if (!text.isEmpty()) {
-                generateQR(text);
-            } else {
-                Toast.makeText(this, "Введите текст", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     private void generateQR(String text) {
