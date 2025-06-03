@@ -91,36 +91,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean checkTeacherParol(String login, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(
+        try (Cursor cursor = db.query(
                 "teachers",
                 new String[]{"password_hash"},
                 "login = ?",
                 new String[]{login},
-                null, null, null
-        );
-        if (cursor.moveToFirst()) {
-            String storedHash = cursor.getString(0);
-            return hashPassword(password).equals(storedHash);
+                null, null, null)) {
+
+            if (cursor.moveToFirst()) {
+                String storedHash = cursor.getString(0);
+                return hashPassword(password).equals(storedHash);
+            }
+            return false;
         }
-        cursor.close();
-        return false;
     }
 
     public boolean checkStudentParol(String login, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(
+        try (Cursor cursor = db.query(
                 "students",
                 new String[]{"password_hash"},
                 "login = ?",
                 new String[]{login},
-                null, null, null
-        );
-        if (cursor.moveToFirst()) {
-            String storedHash = cursor.getString(0);
-            return hashPassword(password).equals(storedHash);
+                null, null, null)) {
+
+            if (cursor.moveToFirst()) {
+                String storedHash = cursor.getString(0);
+                return hashPassword(password).equals(storedHash);
+            }
+            return false;
         }
-        cursor.close();
-        return false;
     }
 
     public boolean addAttendance(int teacherId, int studentId) {
@@ -151,23 +151,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void createTestData() {
-        // Добавляем учителей
-        registerTeacher("teacher1", "teacher1pass", "Елена Математикова", "Математика");
-        registerTeacher("teacher2", "teacher2pass", "Ольга Физикова", "Физика");
+        registerTeacher("teacherPogova", "teacher1pass", "Елена Погова", "Математика");
+        registerTeacher("teacherDevyatkina", "teacher2pass", "Ольга Девяткина", "Физика");
 
-        // Класс 10-А
-        registerStudent("student1", "student1pass", "Иван Петров", "10-А");
-        registerStudent("student2", "student2pass", "Мария Сидорова", "10-А");
-        registerStudent("student3", "student3pass", "Алексей Иванов", "10-А");
-        registerStudent("student4", "student4pass", "Елена Смирнова", "10-А");
-        registerStudent("student5", "student5pass", "Дмитрий Кузнецов", "10-А");
+        registerStudent("studentPetrov", "student1pass", "Иван Петров", "10-А");
+        registerStudent("studentSidorova", "student2pass", "Мария Сидорова", "10-А");
+        registerStudent("studentIvanov", "student3pass", "Алексей Иванов", "10-А");
+        registerStudent("studentSmirnova", "student4pass", "Елена Смирнова", "10-А");
+        registerStudent("studentKuznetsov", "student5pass", "Дмитрий Кузнецов", "10-А");
 
-        // Класс 11-Б
-        registerStudent("student6", "student6pass", "Анна Васильева", "11-Б");
-        registerStudent("student7", "student7pass", "Сергей Павлов", "11-Б");
-        registerStudent("student8", "student8pass", "Ольга Николаева", "11-Б");
-        registerStudent("student9", "student9pass", "Михаил Фёдоров", "11-Б");
-        registerStudent("student10", "student10pass", "Наталья Козлова", "11-Б");
+        registerStudent("studentVasilieva", "student6pass", "Анна Васильева", "11-Б");
+        registerStudent("studentPavlov", "student7pass", "Сергей Павлов", "11-Б");
+        registerStudent("studentNikolaeva", "student8pass", "Ольга Николаева", "11-Б");
+        registerStudent("studentFedorov", "student9pass", "Михаил Фёдоров", "11-Б");
+        registerStudent("studentKozlova", "student10pass", "Наталья Козлова", "11-Б");
     }
-
 }
